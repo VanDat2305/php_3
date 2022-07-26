@@ -19,6 +19,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
     protected $fillable = [
         'name',
         'email',
@@ -43,6 +44,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function loadListWithPager($params = [])
+    {
+        $query = DB::table($this->table)
+            ->select($this->fillable);
+        $lists = $query->get();
+        return $lists;
+    }
     public function saveNew($params)
     {
         $data = array_merge(
@@ -52,7 +60,14 @@ class User extends Authenticatable
                 // 'leve' = 1
             ]
         );
-        $res = DB::table('user')->insertGetId($data);
+        $res = DB::table('users')->insertGetId($data);
         return $res;
+    }
+    public function loadOne($id, $param = null)
+    {
+        $query = DB::table($this->table)
+            ->where('id', '=', $id);
+        $obj = $query->first();
+        return $obj;
     }
 }

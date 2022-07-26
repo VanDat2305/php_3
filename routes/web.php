@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,9 @@ Route::get('/logout', "Auth\LoginController@getLogout")->name('logout');
 Route::match(['get', 'post'], 'add', 'UserController@add')->name('Route_BackEnd_User_Add');
 Route::get('/test', 'UserController@getList');
 Route::get('/sinhvien', 'UserController@getList');
+Route::get('/sinhvien/{id}', 'UserController@detail');
+
+// Route::resources('/DatController', DatController::class);
 // Route::get('/dangky', function(){
 //     return view('formRegister');
 // });
