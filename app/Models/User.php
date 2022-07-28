@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -69,5 +70,22 @@ class User extends Authenticatable
             ->where('id', '=', $id);
         $obj = $query->first();
         return $obj;
+    }
+    public function saveUpdate($params)
+    {
+        if (empty($params['cols']['id'])) {
+            Session::flash('error', "Không xác định bản ghi cập ");
+            return null;
+        }
+        $dateUpdate = [];
+        foreach ($params['cols'] as $colsName => $val) {
+            if ($colsName == 'id') continue;
+            if (in_array($colsName, $this->fillable)) {
+                $dataUpdate[$colsName] = (strlen($val) == 0) ? null : $val;
+            }
+        }
+        $res = DB::table($this->table)
+            ->where('id', $params['cols']['id'])->update($dataUpdate);
+        return $res;
     }
 }

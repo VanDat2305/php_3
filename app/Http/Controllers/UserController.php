@@ -8,6 +8,8 @@ use App\Models\Students;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -65,5 +67,28 @@ class UserController extends Controller
         $obj = $user->loadOne($id);
         $this->v['objItem'] = $obj;
         return view('user.detail', $this->v);
+    }
+    public function update($id, Request $request)
+    {
+        $method_route = "route_BackEnd_User_Detail";
+        $params = [];
+        $params['cols'] = $request->post();
+        unset($params['cols']['_token']);
+        $test2 = new User();
+        $objItem = $test2->loadOne($id);
+        $params['cols']['id'] = $id;
+        if (!is_null($params['cols']['password'])) {
+            $params['cols']['password'] = Hash::make($params['cols']['password']);
+        }
+        $res = $test2->saveUpdate($params);
+        if ($res == null) {
+            return  redirect()->route($method_route, ['id' => $id]);
+        } elseif ($res > 1) {
+            Session::flash('success', 'Thêm mới thành công');
+            return redirect()->route($method_route, ['id' => $id]);
+        } else {
+            Session::flash('error', 'Thêm mới thất bại');
+            return redirect()->route($method_route, ['id' => $id]);
+        }
     }
 }

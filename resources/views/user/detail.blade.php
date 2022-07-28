@@ -76,7 +76,8 @@
         @endif
 
         <!-- Phần nội dung riêng của action  -->
-        <form class="form-horizontal " action="" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal " action="{{ route('route_BackEnd_User_Update', ['id' => request()->route('id')]) }}"
+            method="post" enctype="multipart/form-data">
             @csrf
             <div class="box-body">
                 <div class="row">

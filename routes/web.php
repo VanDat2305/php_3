@@ -26,7 +26,8 @@ Route::get('/logout', "Auth\LoginController@getLogout")->name('logout');
 Route::match(['get', 'post'], 'add', 'UserController@add')->name('Route_BackEnd_User_Add');
 Route::get('/test', 'UserController@getList');
 Route::get('/sinhvien', 'UserController@getList');
-Route::get('/sinhvien/{id}', 'UserController@detail');
+Route::get('/sinhvien/{id}', 'UserController@detail')->name('route_BackEnd_User_Detail');
+Route::post('/sinhvien/{id}', 'UserController@update')->name('route_BackEnd_User_Update');
 
 // Route::resources('/DatController', DatController::class);
 // Route::get('/dangky', function(){
