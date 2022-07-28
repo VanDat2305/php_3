@@ -4,10 +4,10 @@
     <style>
         body {
             /*-webkit-touch-callout: none;
-                                                    -webkit-user-select: none;
-                                                    -moz-user-select: none;
-                                                    -ms-user-select: none;
-                                                    -o-user-select: none;*/
+                                                                                                            -webkit-user-select: none;
+                                                                                                            -moz-user-select: none;
+                                                                                                            -ms-user-select: none;
+                                                                                                            -o-user-select: none;*/
             user-select: none;
         }
 
@@ -151,23 +151,23 @@
                             <th style="width: 50px" class="text-center">
                                 #ID
                             </th>
-                            <th class="text-center">Tên người dùng</th>
+                            <th class="text-center">Tên </th>
                             <th class="text-center">
-                                địa chỉ
+                                email
                             </th>
                             <th class="text-center">Quyền</th>
                             <th class="text-center">Trạng thái</th>
                         </tr>
-
+                        {{ dd($lists) }}
                         @foreach ($lists as $list)
                             <tr>
                                 {{-- <td><input type="checkbox" name="chk_hv[]" class="chk_hv" id="chk_hv_{{$item->id}}" value="{{$item->id}}"> </td> --}}
                                 <td class="text-center">{{ $list->id }}</td>
                                 <td class="text-center"><a style="color:#333333;font-weight: bold;" href=""
-                                        style="white-space:unset;text-align: justify;"> {{ $list->ten_sinh_vien }} <i
+                                        style="white-space:unset;text-align: justify;"> {{ $list->name }} <i
                                             class="fa fa-edit"></i></a>
                                 </td>
-                                <td class="text-center">{{ $list->dia_chi }}</td>
+                                <td class="text-center">{{ $list->email }}</td>
                                 <td class="text-center">
                                     nhân viên
                                 </td>

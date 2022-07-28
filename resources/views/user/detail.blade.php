@@ -87,7 +87,7 @@
 
                             <div class="col-md-9 col-sm-8">
                                 <input type="text" name="name" id="name" class="form-control"
-                                    value="@isset($request['name']) {{ $request['name'] }} @endisset">
+                                    value="{{ $objItem->name }}">
                                 <span id="mes_sdt"></span>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                                     class="text-danger">(*)</span></label>
                             <div class="col-md-9 col-sm-8">
                                 <input type="text" name="email" id="email" class="form-control"
-                                    value="{{ old('email') }}">
+                                    value="{{ $objItem->email }}">
                                 <span id="mes_sdt"></span>
                             </div>
                         </div>
